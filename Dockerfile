@@ -11,11 +11,10 @@ RUN apt-get update && apt-get install -y --no-install-suggests --no-install-reco
   && apt-get update \
   && apt-get install --no-install-recommends -y signal-desktop
 
-RUN groupadd -r signal && useradd --no-log-init -r -g signal signal
+RUN groupadd -r signal && useradd --no-log-init -m -g signal signal
 
 USER "signal"
 
 WORKDIR "/home/signal"
 
-ENTRYPOINT /usr/local/bin/signal-desktop --quiet >/dev/null
-
+ENTRYPOINT /usr/local/bin/signal-desktop --quiet >/dev/null 2>&1
