@@ -1,4 +1,4 @@
-FROM bitnami/minideb:latest
+FROM ubuntu:xenial
 
 LABEL maintainer "Bea Hughes <bea@mumble.org.uk>"
 
@@ -13,8 +13,10 @@ RUN apt-get update && apt-get install -y --no-install-suggests --no-install-reco
 
 RUN groupadd -r signal && useradd --no-log-init -m -g signal signal
 
+RUN chown root:root /opt/Signal/chrome-sandbox && chmod 4755 /opt/Signal/chrome-sandbox
+
 USER "signal"
 
 WORKDIR "/home/signal"
 
-ENTRYPOINT /usr/local/bin/signal-desktop --quiet >/dev/null 2>&1
+ENTRYPOINT /opt/Signal/signal-desktop --quiet >/dev/null 2>&1
