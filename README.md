@@ -4,6 +4,8 @@ Whisper Systems Signal Desktop in a container.
 
 With more minimal exposure. Only mounts your Signal config, not the entire homedir. If you want to save images off of signal or whatever, you're relatively out of luck. (or just make a "save" folder in ~/.config/Signal/)
 
+Runs using "--cap-add SYS_ADMIN" as I'm not JessFraz so couldn't get it working otherwise!
+
 ## MacOS: Using this image
 
 On MacOS, if you wish to run this image, you need to install `XQuartz` and
@@ -34,6 +36,7 @@ signal() {
 
   ( ( docker run --rm \
     --net host \
+    --cap-add SYS_ADMIN \
     -e XAUTHORITY=/tmp/xauth \
     -e DISPLAY=$__my_ip:1 \
     -v $HOME/.Xauthority:/tmp/xauth \
