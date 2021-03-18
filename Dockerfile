@@ -1,9 +1,9 @@
-FROM ubuntu:xenial
+FROM ubuntu:bionic
 
 LABEL maintainer "Bea Hughes <bea@mumble.org.uk>"
 
 RUN apt-get update && apt-get install -y --no-install-suggests --no-install-recommends \
-        curl gnupg2 apt-transport-https ca-certificates libx11-xcb1 libasound2 libgtk-3-0 \
+        curl gnupg2 apt-transport-https ca-certificates libx11-xcb1 libasound2 libgtk-3-0 libgbm1 libdrm2 \
   && curl -s https://updates.signal.org/desktop/apt/keys.asc > signal-repo.key \
   && apt-key add signal-repo.key \
   && echo "deb [arch=amd64] https://updates.signal.org/desktop/apt xenial main" > \
@@ -20,3 +20,4 @@ USER "signal"
 WORKDIR "/home/signal"
 
 ENTRYPOINT /opt/Signal/signal-desktop --quiet >/dev/null 2>&1
+# ENTRYPOINT /opt/Signal/signal-desktop 
